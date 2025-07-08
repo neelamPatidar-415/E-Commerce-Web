@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Products</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+  <div class="flex">
+    <!-- Sidebar -->
+    <aside class="w-64 p-6 bg-white shadow h-screen">
+      <div class="mb-6">
+        <label class="block text-sm font-semibold mb-2">Sort by</label>
+        <select class="w-full border px-3 py-2 rounded">
+          <option>Popular</option>
+          <option>Low to High</option>
+          <option>High to Low</option>
+        </select>
+      </div>
+
+      <nav class="space-y-3 text-sm">
+        <p class="cursor-pointer hover:font-medium">New Collection</p>
+        <p class="cursor-pointer hover:font-medium">All Products</p>
+        <p class="cursor-pointer hover:font-medium">Discounted Products</p>
+      </nav>
+
+      <div class="mt-8 text-sm">
+        <p class="font-semibold">Filter by:</p>
+        <p class="mt-2 cursor-pointer hover:font-medium">Availability</p>
+        <p class="cursor-pointer hover:font-medium">Discount</p>
+      </div>
+    </aside>
+
+    <!-- Main Product Grid -->
+    <main class="flex-1 p-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <% products.forEach(product => { %>
+        <div class="rounded-lg overflow-hidden shadow-lg">
+          <div 
+            class="w-full h-48 flex items-center justify-center"
+            
+          >
+            <% if (product.image && product.image.base64) { %>
+              <img src="data:image/png;base64,<%= product.image.toString('base64') %>" alt="<%= product.name %>" class="object-contain h-full">
+            <% } else { %>
+              <span class="text-white text-xl">🖼️</span>
+            <% } %>
+          </div>
+          <div 
+            class="p-4 flex justify-between items-center"
+          >
+            <div>
+              <p class="font-medium"><%= product.name %></p>
+              <p>₹ <%= product.price %></p>
+              <% if (product.discount) { %>
+                <p class="text-sm text-green-300">Discount: ₹<%= product.discount %></p>
+              <% } %>
+            </div>
+            <button class="bg-white text-black font-bold w-8 h-8 rounded-full flex items-center justify-center hover:bg-gray-200 transition">
+              +
+            </button>
+          </div>
+        </div>
+      <% }) %>
+    </main>
+  </div>
+</body>
+</html>

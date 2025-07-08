@@ -43,15 +43,23 @@
 
 <body class="min-h-screen bg-gradient-to-b from-white to-gray-100 ">
 
-  <% if(error.length>0) { %>
+  <!-- <% if(error.length>0) { %>
   <div class="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 rounded-md bg-red-500">
     <span class="inline-block mt-1 mb-1 text-white">
       <%=error%>
     </span>
   </div>
-  <% } %>
+  <% } %> -->
 
-  <h3 class="text-lg font-semibold mb-10 px-0 py-0">Scatch</h3>
+  <% if(error.length > 0) { %>
+  <div id="error-box" class="absolute top-5 left-1/2 -translate-x-1/2 -translate-y-1/2 p-3 rounded-md bg-red-500">
+    <span class="inline-block mt-1 mb-1 text-white"><%= error %></span>
+    <div id="progress-bar" class="h-1 bg-white mt-2"></div>
+  </div>
+<% } %>
+
+
+  <%- include('../partials/header') %>
 
   <div class="flex justify-center items-start gap-[50px] px-10 py-20">
     <!-- Create Account Section -->
@@ -79,6 +87,24 @@
       </form>
     </div>
   </div>
+  <script src="../javascripts/script.js"></script>
+   <!-- <script>
+  const box = document.getElementById('error-box');
+  const bar = document.getElementById('progress-bar');
+
+  if (box) {
+    bar.style.width = '100%';
+    bar.style.transition = 'width 3s linear';
+    setTimeout(() => {
+      bar.style.width = '0%';
+    }, 100);
+
+    setTimeout(() => {
+      box.remove();
+    }, 3100); // after 3.1 sec
+  }
+</script> -->
+
 </body>
 
 </html>

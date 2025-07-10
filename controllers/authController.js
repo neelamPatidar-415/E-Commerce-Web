@@ -1,4 +1,6 @@
 const userModel = require("../models/user-model");
+const productModel = require('../models/product-model');
+
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const {generateToken} = require("../utils/generateToken");
@@ -29,7 +31,10 @@ module.exports.registerUser = async function(req,res){
               //create generateToken.js at utils and crete token their export and require here and use as a function lana usse
               let token = generateToken(user);
               res.cookie("token", token);
-              res.send("User created successfull");
+              res.render("/index/")
+              // res.send("User created successfull");
+              req.flash("success", "User Created Successfully, Wanna Login Now");
+              return res.redirect("/index/");
             }
         })
       })
@@ -67,14 +72,6 @@ module.exports.loginUser = async function(req,res){
 
 
 module.exports.logoutUser = async function(req,res){
-    //logout karao
-
-    if(!req.cookies.token){
-      res.cookie("token", "");
-    }
-    
-    // return res.redirect("/");
-    res.send("Logged out");
-
-
+    res.cookie("token","");
+    res.redirect('/index/');
 };

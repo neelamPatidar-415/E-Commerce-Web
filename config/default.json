@@ -1,3 +1,4 @@
 {
-    "MONGODB_URI" : "mongodb://127.0.0.1:27017"
+    "MONGO_URI" : "mongodb+srv://neelampatidar415:uF6LPoq31WWlY2L9@ecommerce.4gf0iwr.mongodb.net/",
+    "EXPRESS_SESSION_SECRET" : "neelamSuperSecret"
 }

@@ -46,6 +46,10 @@ app.use(cookieParser());
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname , "public")));
 
+app.get('/', (req, res) => {
+  res.redirect('/index');
+});
+
 app.use("/index",index);
 app.use("/owners",ownersRouter);
 app.use("/products",productsRouter);

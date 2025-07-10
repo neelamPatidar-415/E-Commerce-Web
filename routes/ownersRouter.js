@@ -24,6 +24,19 @@ if(process.env.NODE_ENV === "development"){
     })
 }
 
+router.post("/login", async (req, res) => {
+  const { email, password } = req.body;
+  const owner = await ownermodel.findOne({ email });
+
+  if (!owner || owner.password !== password) {
+    return res.status(401).send("Invalid credentials");
+  }
+
+  req.session.owner = owner; // store owner in session
+  res.status(200).send("Logged in successfully");
+});
+
+
 router.get("/admin", function(req,res){
     let success = req.flash("success");
     res.render("createProducts", {success});

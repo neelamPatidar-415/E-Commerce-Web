@@ -11,7 +11,11 @@ module.exports.registerUser = async function(req,res){
 
       //if user already have acc with this email then don't create again
       const user = await userModel.findOne({email});
-      if(user) return res.status(203).send("You already have account. Please Login");
+      if(user) {
+        // return res.status(203).send("You already have account. Please Login");
+        req.flash("success", "You already have account. Please Login");
+        return res.redirect("/");
+      }
 
       //creating hash then replace password at database 
       bcrypt.genSalt(10,function(err,salt){
@@ -31,10 +35,10 @@ module.exports.registerUser = async function(req,res){
               //create generateToken.js at utils and crete token their export and require here and use as a function lana usse
               let token = generateToken(user);
               res.cookie("token", token);
-              res.render("/index/")
+              res.render("/") ;       ///////////
               // res.send("User created successfull");
-              req.flash("success", "User Created Successfully, Wanna Login Now");
-              return res.redirect("/index/");
+              req.flash("success", "User Created Successfully, Want to Login Now");
+              return res.redirect("/");
             }
         })
       })
@@ -51,7 +55,7 @@ module.exports.loginUser = async function(req,res){
     let user = await userModel.findOne({email});
     if(!user) {
       req.flash("error","email or password incorrect");
-      return res.redirect("/index/");
+      return res.redirect("/");
     }
 
     bcrypt.compare(password, user.password, async function(err, result){
@@ -65,7 +69,7 @@ module.exports.loginUser = async function(req,res){
         } else {
           // res.status(504).send("email or password incorrect");
           req.flash("error", "email or password incorrect");
-          return res.redirect("/index/");
+          return res.redirect("/");
         }
     })
 };
@@ -73,5 +77,5 @@ module.exports.loginUser = async function(req,res){
 
 module.exports.logoutUser = async function(req,res){
     res.cookie("token","");
-    res.redirect('/index/');
+    res.redirect('/');
 };

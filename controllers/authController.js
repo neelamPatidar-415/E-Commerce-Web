@@ -35,7 +35,7 @@ module.exports.registerUser = async function(req,res){
               //create generateToken.js at utils and crete token their export and require here and use as a function lana usse
               let token = generateToken(user);
               res.cookie("token", token);
-              res.render("/") ;       ///////////
+              // res.render("/") ;       ///////////
               // res.send("User created successfull");
               req.flash("success", "User Created Successfully, Want to Login Now");
               return res.redirect("/");

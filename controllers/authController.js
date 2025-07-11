@@ -6,6 +6,14 @@ const jwt = require("jsonwebtoken");
 const {generateToken} = require("../utils/generateToken");
 
 module.exports.registerUser = async function(req,res){
+  let { fullname, email, password } = req.body;
+
+// manual empty check
+if (!fullname || !email || !password) {
+  req.flash("error", "All fields are required!");
+  return res.redirect("/"); // or res.send("Fill all fields")
+}
+
     try {
       let { fullname, email, password } = req.body;
 

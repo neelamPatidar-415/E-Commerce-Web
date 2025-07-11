@@ -17,7 +17,7 @@
 
   <div class="flex ">
     <!-- Sidebar -->
-    <aside class="w-64 p-6 mt-20 bg-white shadow h-screen fixed">
+    <aside class=" hidden md:block w-64 p-6 mt-20 bg-white shadow h-screen fixed">
       <div class="mb-6">
         <label class="block text-sm font-semibold mb-2">Sort by</label>
         <select class="w-full border px-3 py-2 rounded">
@@ -40,7 +40,7 @@
       </div>
     </aside>
 
-   <main class="pt-20 ml-64 flex-1 p-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+   <main class="pt-20 md:ml-64 flex-1 p-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
   <% products.forEach(product => { %>
     <div class="rounded-lg overflow-hidden shadow-lg flex flex-col justify-between <%= product.panelcolor %> h-[400px]">
       
